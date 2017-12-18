@@ -1,9 +1,15 @@
 package com.fuyoufang.domain;
 
-public class Car {
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.*;
+
+public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, DisposableBean {
     private String brand;
     private String color;
     private int maxSpeed;
+
+    private BeanFactory beanFactory;
+    private String beanName;
 
     public Car() {
     }
@@ -12,6 +18,36 @@ public class Car {
         this.brand = brand;
         this.color = color;
         this.maxSpeed = maxSpeed;
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        System.out.println("调用：setBeanFactory");
+        this.beanFactory = beanFactory;
+    }
+
+    @Override
+    public void setBeanName(String name) {
+        System.out.println("调用：setBeanName");
+        this.beanName = name;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("调用：afterPropertiesSet");
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("调用：destroy");
+    }
+
+    public void myInit() {
+        System.out.println("调用：init-method");
+    }
+
+    public void myDestory() {
+        System.out.println("调用：destory-method");
     }
 
     @Override
