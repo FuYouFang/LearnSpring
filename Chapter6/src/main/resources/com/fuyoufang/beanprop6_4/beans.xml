@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--方式1-->
+    <!--<context:property-placeholder location="com/fuyoufang/beanprop6_4/jdbc.properties" />-->
+    <!--方式2-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:location="com/fuyoufang/beanprop6_4/jdbc.properties"
+          p:fileEncoding="utf-8"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+          p:driverClassName="${driverClassName}"
+          p:username="${userName}"
+          p:password="${password}"
+          p:url="${url}" />
+
+    <bean id="dataSource1" class="com.fuyoufang.beanprop6_4.MyDataSource"
+          p:driverClassName="${driverClassName}"
+          p:userName="${userName}"
+          p:password="${password}"
+          p:url="${url}" />
+
+    <bean id="sysConfig" class="com.fuyoufang.beanprop6_4.SysConfig" p:dataSource-ref="dataSource" init-method="initFromDB"/>
+
+    <bean id="manager" class="com.fuyoufang.beanprop6_4.ApplicationManager"
+          p:maxTabPageNum="#{sysConfig.maxTabPageNum}"
+          p:sessionTimeout="#{sysConfig.sessionTimeout}"/>
+
+</beans>

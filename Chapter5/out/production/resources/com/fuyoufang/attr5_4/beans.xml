@@ -110,13 +110,13 @@
         </property>
     </bean>
 
-    <bean id="myField"
-          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
-        <property name="staticField"
-                  value="com.fuyoufang.attr5_4.Car.HONG_QI" />
-        <property name="targetObject" ref="car"></property>
+    <!--<bean id="myField"-->
+          <!--class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">-->
+        <!--<property name="staticField"-->
+                  <!--value="com.fuyoufang.attr5_4.Car.HONG_QI" />-->
+        <!--<property name="targetObject" ref="car"></property>-->
         <!--<property name="targetField" value="brand"></property>-->
-    </bean>
+    <!--</bean>-->
 
 
     <bean id="foo" class="com.fuyoufang.attr5_4.Foo">

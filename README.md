@@ -32,13 +32,28 @@
 1. 书中 p148 Porlet 应用环境是什么？
 1. 代码 resources 中 com.fuyoufang.attr5_4.beans.xml 中 PropertyPathFactoryBean，MethodInvokingFactoryBean，FieldRetrievingFactoryBean 的用法，书中没有找到对应的讲解。
 1. 代码 resources 中 com.fuyoufang.attr5_4.beans.xml 中 FieldRetrievingFactoryBean 中的示例无法运行  
-
+1. 代码 anno5_10 中 aspectj 相关的代码有错误
 #### 未完成
 1. 没有阅读 5.12 和 5.13 章节的内容
 
 #### 其他知识
 1. 代码 resources 中 com.fuyoufang.attr5_4_8.beans.xml 中 autowire-candidate 未讲解应该如何使用。他可以指定在自动装配的时候，如果有多个类型相符，可以排除掉不想要的。
 
+
+### chapter6
+#### 问题
+1. ToStringBuilder 的用法
+
+```
+import org.apache.commons.lang.builder.ToStringBuilder;
+ToStringBuilder.reflectionToString(Object);
+```
+1. p195 PropertyPlaceholderConfigurer 继承自 PropertyResourceConfigurer，PropertyResourceConfigurer的作用是什么？
+1. P196 学些 DES 算法的具体实现，代码placeholder6_3_2。（每次运行的结果都不一样）   
+1. p212 中对 ResolvableType 的学习
+
+#### 未完成
+1. 没有阅读 6.5 国际化信息的内容
 
 ### 书中发现的错误
 1. p81 代码清单4-11 代码中空格

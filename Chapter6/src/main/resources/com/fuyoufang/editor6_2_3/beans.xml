@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="com.fuyoufang.editor6_2_3.Car"
+                       value="com.fuyoufang.editor6_2_3.CustomCarEditor"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="boss" class="com.fuyoufang.editor6_2_3.Boss">
+        <property name="name" value="John"/>
+        <property name="car" value="红旗CA72,200,20000.00"/>
+        <property name="house" value="深圳,南山" />
+    </bean>
+</beans>

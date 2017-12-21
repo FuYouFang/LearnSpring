@@ -7,13 +7,13 @@
 
     <context:component-scan base-package="com.fuyoufang.anno5_10" />
 
-    <!--<context:component-scan base-package="com.fuyoufang" use-default-filters="false">-->
-        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />-->
-    <!--</context:component-scan>-->
+    <context:component-scan base-package="com.fuyoufang.anno5_10" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
 
-    <!--<context:component-scan base-package="com.fuyoufang">-->
-        <!--<context:include-filter type="regex" expression="com\.fuyoufang\.anno.*"/>-->
-        <!--<context:include-filter type="aspectj" expression="com.fuyoufang..*Controller+"/>-->
-    <!--</context:component-scan>-->
+    <context:component-scan base-package="com.fuyoufang.anno5_10">
+        <context:include-filter type="regex" expression="com\.fuyoufang\.anno5_10.*"/>
+        <context:include-filter type="aspectj" expression="com.fuyoufang.anno5_10..*Controller+"/>
+    </context:component-scan>
 
 </beans>
