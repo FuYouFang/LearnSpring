@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <bean id="car" class="com.fuyoufang.attr5_4.Car" lazy-init="default" >
+        <property name="brand">
+            <value>
+                <![CDATA[红旗&8989]]>
+            </value>
+        </property>
+        <property name="maxSpeed">
+            <value>200</value>
+        </property>
+    </bean>
+
+
+    <bean id="boss1" class="com.fuyoufang.attr5_4.Boss">
+        <property name="car" ref="car" />
+        <property name="favorites2">
+            <list>
+                <value>游泳</value>
+                <value>看书</value>
+            </list>
+        </property>
+        <property name="favorites">
+            <set>
+                <value>游泳</value>
+                <value>赛车</value>
+            </set>
+        </property>
+
+        <property name="jobs">
+            <map>
+                <entry>
+                    <key><value>AM</value></key>
+                    <value>会见客户</value>
+                </entry>
+                <entry>
+                    <key><value>PM</value></key>
+                    <value>公司内部会议</value>
+                </entry>
+            </map>
+        </property>
+
+        <property name="mails">
+            <props>
+                <prop key="qq" >12@qq.com</prop>
+                <prop key="163">123@163.com</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--内部bean-->
+    <bean id="boss2" class="com.fuyoufang.attr5_4.Boss">
+        <property name="car">
+            <bean class="com.fuyoufang.attr5_4.Car">
+                <property name="maxSpeed" value="200"/>
+                <property name="brand" value="红旗"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!--父类-->
+    <bean id="parentBoss" class="com.fuyoufang.attr5_4.Boss" abstract="true">
+        <property name="favorites">
+            <set>
+                <value>看报</value>
+            </set>
+        </property>
+    </bean>
+    <bean id="childBoss" parent="parentBoss">
+        <property name="favorites">
+            <set merge="true">
+                <value>游泳</value>
+            </set>
+        </property>
+    </bean>
+
+    <!--集合-->
+    <util:list id="favorites" list-class="java.util.LinkedList">
+        <value>看报</value>
+        <value>游泳</value>
+    </util:list>
+
+    <util:set id="favorites2">
+        <value>看报</value>
+        <value>游泳</value>
+    </util:set>
+
+    <util:map id="map">
+        <entry key="qq" value="qq.com"></entry>
+        <entry key="baidu" value="baidu.com"></entry>
+    </util:map>
+
+    <bean id="sportsCar" class="com.fuyoufang.attr5_4.SportsCar">
+        <property name="brand">
+            <bean id="car.brand" class="org.springframework.beans.factory.config.PropertyPathFactoryBean"/>
+        </property>
+    </bean>
+
+    <bean id="brand"
+          class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref bean="car" />
+        </property>
+        <property name="targetMethod">
+            <value>getBrand</value>
+        </property>
+    </bean>
+
+    <!--<bean id="myField"-->
+          <!--class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">-->
+        <!--<property name="staticField"-->
+                  <!--value="com.fuyoufang.attr5_4.Car.HONG_QI" />-->
+        <!--<property name="targetObject" ref="car"></property>-->
+        <!--<property name="targetField" value="brand"></property>-->
+    <!--</bean>-->
+
+
+    <bean id="foo" class="com.fuyoufang.attr5_4.Foo">
+        <property name="IDCode" value="070101" />
+    </bean>
+</beans>

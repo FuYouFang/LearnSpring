@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="car" class="com.fuyoufang.injectfun5_5.Car" p:brand="奔驰" scope="prototype"/>
+
+    <bean id="magicBoss" class="com.fuyoufang.injectfun5_5.MagicBoss">
+        <lookup-method name="getCar" bean="car" />
+    </bean>
+
+    <bean id="boss2" class="com.fuyoufang.injectfun5_5.Boss2" />
+
+    <bean id="boss1" class="com.fuyoufang.injectfun5_5.Boss1">
+        <replaced-method name="getCar" replacer="boss2" />
+    </bean>
+
+
+</beans>

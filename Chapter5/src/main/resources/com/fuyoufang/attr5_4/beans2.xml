@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="car" class="com.fuyoufang.attr5_4.Car">
+        <property name="maxSpeed"><value>200</value></property>
+
+    </bean>
+
+    <bean id="boss" class="com.fuyoufang.attr5_4.Boss">
+        <property name="car">
+            <ref parent="car"></ref>
+        </property>
+    </bean>
+
+    <bean id="boss1" class="com.fuyoufang.attr5_4.Boss">
+        <property name="car">
+            <bean class="com.fuyoufang.attr5_4.Car">
+                <property name="maxSpeed" value="200"/>
+                <property name="brand" value="奥迪" />
+                <property name="price" value="20"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!--<bean id="car1" class="com.fuyoufang.attr5_4.Car">-->
+        <!--<property name="brand"><null></null></property>-->
+    <!--</bean>-->
+
+    <!--<bean id="boss2" class="com.fuyoufang.attr5_4.Boss">-->
+        <!--<property name="car.brand" value="东风" />-->
+    <!--</bean>-->
+</beans>

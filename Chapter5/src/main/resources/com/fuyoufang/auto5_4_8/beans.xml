@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="office1" class="com.fuyoufang.auto5_4_8.Office" />
+    <bean id="office2" class="com.fuyoufang.auto5_4_8.Office" autowire-candidate="false"/>
+
+    <bean id="boss" class="com.fuyoufang.auto5_4_8.Boss" autowire="constructor">
+        <constructor-arg index="0" value="fang">
+
+        </constructor-arg>
+    </bean>
+
+    <bean id="car" class="com.fuyoufang.auto5_4_8.Car" scope="singleton">
+        <property name="brand" value="奔驰"/>
+    </bean>
+</beans>
