@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="monitor" class="com.fuyoufang.introduce7_3_6.ControllablePerformaceMonitor"/>
+    <bean id="target" class="com.fuyoufang.introduce7_3_6.ForumService"/>
+    <bean id="forumService" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:proxyInterfaces="com.fuyoufang.introduce7_3_6.Monitorable"
+          p:target-ref="target"
+          p:proxyTargetClass="true"
+          p:interceptorNames="monitor">
+
+    </bean>
+</beans>

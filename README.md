@@ -55,6 +55,17 @@ ToStringBuilder.reflectionToString(Object);
 #### 未完成
 1. 没有阅读 6.5 国际化信息的内容
 
+### chapter7
+#### 问题
+1. p247 中学习 Class 的 isAssignableFrom 的用法
+```
+public native boolean isAssignableFrom(Class<?> cls);
+```
+1. p253 动态切面代码中，在创建代理的时候调用静态检查有什么用呢？
+
+#### 未完成
+1. aop7_5_4 的实例没有写代码
+
 ### 书中发现的错误
 1. p81 代码清单4-11 代码中空格
 1. p94 应该位 car1
@@ -67,3 +78,11 @@ ToStringBuilder.reflectionToString(Object);
 1. 在代码中 BeanAttrDITest.testBeanRetrieveBoss3() 测试不通过
 1. 在代码中 Chapter5 com.smart.conf.DaoConfig 中 bean 的名称不能为空
 1. 在代码中 Chapter5 resources/com/smart/tagdepend/beans.xml 中 "<bean>的信赖" 应该为 "<bean>的依赖"
+1. p231 图 7-4 增强接口继承关系图 中 IntroductionInterceptor 为 spring 的接口，图书中标错。
+1. p241 "如果没有对 ControllablePerformanceMonitor 进行线程安全的特殊处理，就必须将 singleton 属性设置为 true" 中，"true" 应该为 "false"
+1. p250 在 "示例1" 中：".*set.* 表示所有类中以 set 为前缀的方法" 应该改为 ".*set.* 表示所有类中包含 set 字符串的方法"
+1. p250 在 "示例4" 中："且这些方法位于 com.smart.service 包中以 Service 为后缀的类中"，这句话应该删除。
+1. p257 "ComposablePointcut 没有提供直接对两个切点进行交并集运算的方法" 中 "交并集运算" 应该改成 "并集运算"，因为已经提供了交集运算的方法。 
+1. p257 代码清单 7-37 GreetingComposablePointcut 中 "return cp.intersection(pt1).intersection(pt2);" 应该为 "return cp.intersection(pt1).intersection((Pointcut)pt2);"，此处需要对 pt2 进行强转
+1. p257 代码清单 7-38 配置复合切点切面 中 "p:pointcut-="#{gcp.intersectionPointcut}"/>" 多了一个"-"，应该为"p:pointcut="#{gcp.intersectionPointcut}"/>"
+1. p262 最后一行中 "则非私有实例方法" 应该为 "且非私有实例方法" （"则"->"且"）

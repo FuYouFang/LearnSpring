@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="sellerTarget" class="com.fuyoufang.advisor7_4.Seller"/>
+    <bean id="waiterTarget" class="com.fuyoufang.advisor7_4.Waiter"/>
+    <bean id="greetingBeforeAdvice" class="com.fuyoufang.advisor7_4.GreetingBeforeAdvice"/>
+
+    <!-- 普通方法名匹配切面 -->
+    <bean id="greetingAdvisor" class="com.fuyoufang.advisor7_4.GreetingAdvisor"
+          p:advice-ref="greetingBeforeAdvice"/>
+
+
+    <bean id="parent" abstract="true" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:interceptorNames="greetingAdvisor"
+          p:proxyTargetClass="true"
+
+    />
+    <bean id="seller" parent="parent" p:target-ref="sellerTarget"/>
+    <bean id="waiter" parent="parent" p:target-ref="waiterTarget"/>
+
+
+    <!-- 正则表达式方法名匹配切面 -->
+    <bean id="regexpAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"
+          p:advice-ref="greetingBeforeAdvice">
+        <property name="patterns">
+            <list>
+                <value>.*greet.*</value>
+                <value>.*set.*</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="waiter1" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:interceptorNames="regexpAdvisor"
+          p:proxyTargetClass="true"
+          p:target-ref="waiterTarget"/>
+
+    <!-- 动态切面 -->
+    <bean id="greetingDynamicPointcut" class="com.fuyoufang.advisor7_4.GreetingDynamicPointcut"/>
+    <bean id="defaultPointcutAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor"
+          p:pointcut-ref="greetingDynamicPointcut"
+          p:advice-ref="greetingBeforeAdvice"/>
+    <bean id="waiter2" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:interceptorNames="defaultPointcutAdvisor"
+          p:proxyTargetClass="true"
+          p:target-ref="waiterTarget"/>
+
+    <!-- 控制流程切面 -->
+    <bean id="controlFlowPointcut" class="org.springframework.aop.support.ControlFlowPointcut">
+        <constructor-arg name="clazz" value="com.fuyoufang.advisor7_4.WaiterDelegate"/>
+        <constructor-arg name="methodName" value="service"/>
+    </bean>
+    <bean id="controlFlowAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor"
+          p:advice-ref="greetingBeforeAdvice"
+          p:pointcut-ref="controlFlowPointcut"/>
+    <bean id="waiter3" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:target-ref="waiterTarget"
+          p:proxyTargetClass="true"
+          p:interceptorNames="controlFlowAdvisor"/>
+
+    <!--复合切点切面-->
+    <bean id="gcp" class="com.fuyoufang.advisor7_4.GreetingComposablePointcut"/>
+    <bean id="composableAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor"
+          p:advice-ref="greetingBeforeAdvice"
+          p:pointcut="#{gcp.intersectionPointcut}"/>
+    <bean id="waiter4" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:interceptorNames="composableAdvisor"
+          p:target-ref="waiterTarget"
+          p:proxyTargetClass="true"/>
+
+    <!--引入切面-->
+    <bean id="introduceAdvisor" class="org.springframework.aop.support.DefaultIntroductionAdvisor">
+        <constructor-arg>
+            <bean class="com.fuyoufang.introduce7_3_6.ControllablePerformaceMonitor"/>
+        </constructor-arg>
+    </bean>
+    <bean id="forumServiceTarget" class="com.fuyoufang.introduce7_3_6.ForumService"/>
+    <bean id="forumService" class="org.springframework.aop.framework.ProxyFactoryBean"
+          p:interceptorNames="introduceAdvisor"
+          p:target-ref="forumServiceTarget"
+          p:proxyTargetClass="true"/>
+</beans>
